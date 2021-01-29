@@ -1,7 +1,7 @@
 import { Button, notification } from 'antd';
 import { SmileOutlined } from '@ant-design/icons';
 import {connect} from 'react-redux';
-import {log} from '../actions';
+import log from '../actions';
 
 import React, { Component } from 'react'
 
@@ -9,22 +9,22 @@ export class Notification extends Component {
     constructor(props) {
         super(props)
     
-        this.state = {
-             data:'',
-        }
+        // this.state = {
+        //      data:'',
+        // }
     }
     
     render() {
-        const data = this.state.data
+        // const data = this.state.data
+        let data='';
         if(this.props.log === true){
-            this.setState({
-                data:'LOGIN SUCCESSFULL',
-            })
-        }else{
-            this.setState({
-                data:'INCORRECT USERNAME OR PASSWORD',
-            })
+            data='LOGIN SUCCESSFULL';
         }
+        else
+        {
+            data='INCORRECT USERNAME OR PASSWORD';
+        }
+        const {log} = this.props;
         return (
             <div>
                 {
@@ -42,7 +42,7 @@ export class Notification extends Component {
 
 
 const mapStateToProps = state =>{
-    const {log} = state.islogged;
+    const log = state.islogged;
     return{
         log
     }

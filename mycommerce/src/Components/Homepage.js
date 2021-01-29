@@ -1,5 +1,5 @@
 import { Card, Col, Row, Avatar } from 'antd';
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import '../App.css';
 import user from '../user.webp';
 import 'antd/dist/antd.css';

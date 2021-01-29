@@ -45,17 +45,19 @@ class LoginUI extends Component{
     console.log('Failed:', errorInfo);
   };
   final=()=>{
-    const {log, submit, cred}= this.props;
+    console.log('log is',this.props.islogged)
+    const {logged, submit, cred}= this.props;
     const {email,pwd,mail,pass}=  this.state;
     if(email === mail) {
-        log(true);
-        console.log()
+      logged(true);
+        console.log('it is true')
         this.setState({
             show:true,
       }) 
     }
       else{
-        log(false)
+        console.log('it is false')
+        logged(false)
         this.setState({
             show:false,
         })
@@ -69,6 +71,7 @@ class LoginUI extends Component{
   
 render(){
   const {show} =this.state;
+  const islogged =this.props;
 
   return (
       <div className='login'>
@@ -125,7 +128,7 @@ render(){
         {/* Or <a href="">register now!</a> */}
       </Form.Item>
     </Form>
-    {this.props.log !== '' ? <Notification/> : null}
+    {islogged === true ? <Notification/> : null}
     </div>
   )
 
@@ -134,9 +137,9 @@ render(){
 
 
 const mapStateToProps = state =>{
-  const log = state.islogged;
+  const islogged = state.islogged;
   return{
-      log
+    islogged
   }
 }
 

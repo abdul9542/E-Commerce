@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-    islogged:''
+    islogged:true
 }
 
 const loggedReducer = (state=INITIAL_STATE, action) =>{
