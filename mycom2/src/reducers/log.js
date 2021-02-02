@@ -1,15 +1,16 @@
 const INITIAL_STATE = {
-    id:0
+    data:''
 }
 
-const idReducer = (state=INITIAL_STATE, action) =>{
+const dataReducer = (state=INITIAL_STATE, action) =>{
     switch(action.type){
-        case 'ASKED':
+        case 'NAMED':
+            console.log("data reducer", action.payload)
             return{
                 ...state,
-                id:action.payload
+                data:action.payload
             }
             default: return state
     }
 }
-export default idReducer;
+export default dataReducer;

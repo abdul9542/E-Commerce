@@ -11,9 +11,10 @@ export const cred = (payload)=>{
         payload
     }    
 }
-export const logged = (payload)=>{
+export const named = (payload)=>{
+    console.log("NAME action", payload)
     return{
-        type:'LOGGED',
+        type:'NAMED',
         payload
     }    
 }

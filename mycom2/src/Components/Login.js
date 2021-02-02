@@ -1,6 +1,6 @@
 import { Form, Input, Button, Checkbox } from "antd";
 import "../App.css";
-import { submit, cred, logged } from "../actions";
+import { submit, cred } from "../actions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -12,11 +12,12 @@ class LoginUI extends Component {
     super(props);
 
     this.state = {
+
       email: "",
       pwd: "",
       mail: "abdul",
       pass: "rub",
-      show: "",
+      show: 0,
     };
   }
 
@@ -44,22 +45,22 @@ class LoginUI extends Component {
     console.log("Failed:", errorInfo);
   };
   final = () => {
-    console.log("log is", this.props.islogged);
-    const { logged, submit, cred } = this.props;
+    // console.log("log is", this.props.islogged);
+    const {  submit, cred } = this.props;
     const { email, pwd, mail, pass } = this.state;
-    if (email === mail) {
-      logged(true);
-      console.log("it is true");
-      this.setState({
-        show: true,
-      });
-    } else {
-      console.log("it is false");
-      logged(false);
-      this.setState({
-        show: false,
-      });
-    }
+    // if (email === mail) {
+    //   logged(true);
+    //   console.log("it is true");
+    //   this.setState({
+    //     show: true,
+    //   });
+    // } else {
+    //   console.log("it is false");
+    //   logged(false);
+    //   this.setState({
+    //     show: false,
+    //   });
+    // }
     submit({ email: email, pwd: pwd });
     console.log("onsubmit", email, pwd);
     cred({ mail: mail, pass: pass });
@@ -67,10 +68,18 @@ class LoginUI extends Component {
   };
 
   render() {
+    let button = 'button1';
+    const { email, pwd, mail, pass, show } = this.state;
     // const info = 'Please input your Username!';
     // if(this.state.email !== '' && this.state.email !== this.state.mail){
     //   info= 'Incorrect Username'
     // }
+    if(email === mail){
+      if(pwd === pass){
+        button = 'button2';
+
+      }
+    }
     return (
       <div className="login">
         <Form
@@ -97,7 +106,6 @@ class LoginUI extends Component {
               onChange={(event) => this.setState({ email: event.target.value })}
             />
           </Form.Item>
-          {this.state.email === this.state.mail ? (
             <Form.Item
               name="password"
               rules={[
@@ -115,7 +123,6 @@ class LoginUI extends Component {
                 onChange={(event) => this.setState({ pwd: event.target.value })}
               />
             </Form.Item>
-          ) : null}
           {/* <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
           <Checkbox>Remember me</Checkbox>
@@ -125,14 +132,14 @@ class LoginUI extends Component {
           Forgot password
         </a>
       </Form.Item> */}
-          {this.state.email === this.state.mail &&
-          this.state.pwd === this.state.pass ? (
+         
             <Form.Item>
               <Link to="/homepage">
                 <Button
                   type="primary"
                   htmlType="submit"
-                  className="login-form-button"
+                  // style={{opacity:show}}
+                  className={button}
                   onClick={() => this.final()}
                 >
                   Log in
@@ -140,7 +147,6 @@ class LoginUI extends Component {
               </Link>
               {/* Or <a href="">register now!</a> */}
             </Form.Item>
-          ) : null}
         </Form>
         {this.state.email !== "" && this.state.email !== this.state.mail ? (
           <Notification type="incorrect username" />
@@ -153,18 +159,17 @@ class LoginUI extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const islogged = state.islogged;
-  return {
-    islogged,
-  };
-};
+// const mapStateToProps = (state) => {
+//   const islogged = state.islogged;
+//   return {
+//     islogged,
+//   };
+// };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     submit: (payload) => dispatch(submit(payload)),
     cred: (payload) => dispatch(cred(payload)),
-    logged: (payload) => dispatch(logged(payload)),
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(LoginUI);
+export default connect(null, mapDispatchToProps)(LoginUI);
