@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Form, Input, Button, Checkbox } from "antd";
-
+// import { Form, Input, Button, Checkbox } from "antd";
+import { Popover, Button } from 'antd';
 import { Layout, Menu, Breadcrumb } from "antd";
 import {ArrowLeftOutlined} from '@ant-design/icons';
 import '../App.css';
@@ -17,11 +17,17 @@ import { Descriptions } from 'antd';
 const { Header, Content, Footer } = Layout;
 
 
-export class Card extends Component {
+export class Card1 extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
+          content : (
+                    <div>
+                        <p>Content</p>
+                        <p>Content</p>
+                      </div>
+                    ),
           contentStyle : {
             height: '160px',
             color: '#fff',
@@ -30,6 +36,8 @@ export class Card extends Component {
             background: '#364d79',
           },
             name: "",
+            images:[dp1,dp2,dp3],
+            index:0,
             cards: [
               {
                 name: "Leanne Graham",
@@ -146,74 +154,97 @@ export class Card extends Component {
         }
     }
     
-    render() {
-        const name= this.props.name;
-        console.log("name render", name)
-        const card= this.state.cards.filter((item)=>item.name === "Chelsey Dietrich")
-        console.log("filter card", card)
-        return (
-            <div className="cardpage" >
-              <div className="input"> <Link to="/homepage">
-              <Button
-                type="primary"
-                htmlType="submit"
-                style={{borderRadius:"18px"}}
-                // className="title"
-              >
-                <ArrowLeftOutlined/>
-              </Button>
-              </Link></div>
-                {card.map((item,index)=>(
-                  
-                    <div key={index}>
-                      <div className="title"><Avatar
-                  style={{
-                    color: '#f56a00',
-                    backgroundColor: '#fde3cf',
-                  }}
-                >
-                  {item.name[0]}
-                </Avatar><h2>{item.name}</h2></div>
-                  
-          <div className='carousal'>
-            <Carousel dotPosition={'left'} >
-          <div >
-            <h3>
-              <img src={dp1} />
-            </h3>
-          </div>
-          <div>
-          <h3 style={this.state.contentStyle}>
-              <img src={dp2} />
-            </h3>
-          </div>
-          {/* <div>
-          <h3>
-              <img src={dp3} />
-            </h3>
-          </div> */}
-          {/* <div>
-          <h3 style={this.state.contentStyle}>
-              <img src={dp2} />
-            </h3>
-          </div> */}
-        </Carousel></div>
-  <Descriptions title={`${item.name}'s Info`}>
-  <Descriptions.Item label="Name">{item.name}</Descriptions.Item>
-  <Descriptions.Item label="UserName">{item.username}</Descriptions.Item>
-    <Descriptions.Item label="Telephone">{item.phone}</Descriptions.Item>
-    <Descriptions.Item label="Email">{item.email}</Descriptions.Item>
-    <Descriptions.Item label="Company">{item.company.name}</Descriptions.Item>
-    <Descriptions.Item label="Address">{item.address.street},{item.address.suite},{item.address.city},</Descriptions.Item>
-    <Descriptions.Item label="zip code">
-    {item.address.zipcode}
-    </Descriptions.Item>
-  </Descriptions>
-  </div>
-                ))}
-            </div>
-        )
+    setIndex=(value)=>{
+      this.setState({
+        index:value,
+      })
+      console.log("index", this.state.index)
     }
+  render() {
+    const name= this.props.name;
+    console.log("name render", name)
+    const card= this.state.cards.filter((item)=>item.name === name.data)
+    console.log("filter card", card)
+    return (
+      <div className="cardpage" >
+        <div className="input">
+          <Link to="/homepage">
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{borderRadius:"18px"}}
+            >
+              <ArrowLeftOutlined/>
+            </Button>
+          </Link>
+        </div>
+        {card.map((item,index)=>
+          (
+            <div key={index}>
+              <div className="title">
+                <Popover content={item.name} title="Name" trigger="hover">
+                  <Avatar
+                    style={{
+                      color: '#f56a00',
+                      backgroundColor: '#fde3cf',
+                    }}
+                  >
+                    {item.name[0]}
+                  </Avatar>
+                </Popover>
+                <h2>
+                  {item.name}
+                </h2>
+              </div>
+              <div className='carousal'>
+                <div className='photos'>
+                  {this.state.images.map((item,index)=>
+                    (
+                      <Popover title={`image${index+1}`} trigger="hover">
+                        <h2 key={index} onClick={()=>this.setIndex(index)}>
+                          <img src={item}/>
+                        </h2>
+                      </Popover>
+                    ))
+                  }
+                </div>
+                <div className="photo">
+                  <Popover title={`image${index+1}`} trigger="hover">
+                    <h2>
+                      <img src={this.state.images[this.state.index]}/>
+                    </h2>
+                  </Popover>
+                </div>
+              </div>
+              <Descriptions title={`${item.name}'s Info`}>
+                <Descriptions.Item label="Name">
+                  {item.name}
+                </Descriptions.Item>
+                <Descriptions.Item label="UserName">
+                  {item.username}
+                </Descriptions.Item>
+                <Descriptions.Item label="Telephone">
+                  {item.phone}
+                </Descriptions.Item>
+                <Descriptions.Item label="Email">
+                  {item.email}
+                </Descriptions.Item>
+                <Descriptions.Item label="Company">
+                  {item.company.name}
+                </Descriptions.Item>
+                <Descriptions.Item label="Address">
+                  {item.address.street},{item.address.suite},{item.address.city},
+                </Descriptions.Item>
+                <Descriptions.Item label="zip code">
+                  {item.address.zipcode}
+                </Descriptions.Item>
+              </Descriptions>
+            </div>
+          ))
+        }
+      </div>
+    )
+  }
 }
 const mapStateToProps = (state) => {
     const name = state.data;
@@ -234,7 +265,7 @@ const mapStateToProps = (state) => {
   
 //     };
 //   };
-  export default connect(mapStateToProps, null)(Card);
+  export default connect(mapStateToProps, null)(Card1);
   
 
  

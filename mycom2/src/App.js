@@ -6,7 +6,8 @@ import {connect} from 'react-redux';
 import 'antd/dist/antd.css';
 import Login from './Components/Login';
 import Card  from './Components/Card';
-import { Component } from 'react';
+import React,{ Component } from 'react';
+import Sample  from './Components/Sample';
 
 class App extends Component {
 render(){

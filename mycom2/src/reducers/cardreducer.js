@@ -121,6 +121,8 @@ const cardReducer = (state=INITIAL_STATE, action) =>{
             console.log('cardetails',state.cardetails)
             const temp = action.payload;
             const cards = [...state.cardetails, temp] 
+            console.log("cards given", action.payload)
+            console.log("cards saved", cards)
             return{
                 ...state,
                 cardetails:cards

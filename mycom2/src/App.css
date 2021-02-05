@@ -9,28 +9,110 @@
 }
 .login {
   display: flex;
-  border: 1px solid;
+  /* border: 1px solid; */
+  padding-top: 10px;
   margin-top: 17%;
   margin-right: 28%;
+  background-color: azure;
+  border-radius: 22px;
   margin-left: 28%;
   justify-content: center;
 }
+.ant-input-affix-wrapper{
+  display: flex;
+  border: 1px solid ;
+  border-radius: 25px !important;
+}
+h3 {
+  height: 160px;
+  color: rgb(255, 255, 255);
+  line-height: 160px;
+}
+.slick-track{
+  display: flex;
+}
+.ant-btn-primary{
+  display: flex;
+  margin-top: 4px;
+  margin-left: 5px;
+}
+/* .ant-btn{
+  display: flex;
+} */ */
 .site-card-border-less-wrapper {
   margin-top: 1%;
   padding: 30px;
   background: #ececec;
 }
+/* .cardpage{
+  background-image: url('e-comm.jpeg');
+  position: fixed;
+} */
 .anticon {
   display: flex;
-  font-size: 27px;
+  font-size: 16px;
   color: blueviolet;
   margin-bottom: 1%;
 }
+.ant-carousel-vertical {
+width: 50% !important;
+justify-content: center;
+}
 .button1{
-  opacity: 0;
+  /* opacity: 0; */
+  
 }
 .button2{
   opacity:1;
+}
+.card{
+  display: flex;
+  background: #ececec;
+
+}
+.item{
+  display: block;
+  width: 103%;
+  padding-left: 37px;
+  margin-left: 25%;
+
+  margin-bottom: 60px;
+}
+/* .item:hover{
+  box-shadow: 20px 20px 2px green;
+} */
+.row{
+  display: flex;
+}
+.cardpage{
+  background-color: azure;
+  /* display: flex; */
+}
+.title{
+  display: flex;
+  padding-top: 9px;
+  padding-left: 12px;
+}
+.carousal{
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid; */
+}
+.input{
+  display:flex;
+}
+.photos h2{
+  display: flex;
+  height: 73px;
+  cursor: pointer;
+}
+.photos h2:hover{
+  opacity: 0.5;
+}
+.photo h2{
+  display: flex;
+  width: 233px;
+  height: 233px;
 }
 .App-logo {
   height: 40vmin;
