@@ -1,7 +1,11 @@
+
 import React, { Component } from 'react'
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { Form, Input, Button, Checkbox } from "antd";
+import { useHistory,Link } from "react-router-dom";
+
+// import { Form, Input, Button, Checkbox } from "antd";
+import { Popover, Button } from 'antd';
+import { carded, named } from "../actions";
 
 import { Layout, Menu, Breadcrumb } from "antd";
 import {ArrowLeftOutlined} from '@ant-design/icons';
@@ -13,228 +17,190 @@ import { Avatar, Image } from 'antd';
 import { Carousel, Radio } from 'antd';
 
 import { Descriptions } from 'antd';
+import Homepage from './Homepage';
 
 const { Header, Content, Footer } = Layout;
 
 
 export class Card extends Component {
-    constructor(props) {
-        super(props)
-    
-        this.state = {
-          contentStyle : {
-            height: '160px',
-            color: '#fff',
-            lineHeight: '160px',
-            textAlign: 'flex-end',
-            background: '#364d79',
-          },
-            name: "",
-            cards: [
-              {
-                name: "Leanne Graham",
-                username: "Bret",
-                email: "Sincere@april.biz",
-                address: {
-                  street: "Kulas Light",
-                  suite: "Apt. 556",
-                  city: "Gwenborough",
-                  zipcode: "92998-3874",
-                  geo: {
-                    lat: "-37.3159",
-                    lng: "81.1496",
-                  },
-                },
-                phone: "1-770-736-8031 x56442",
-                website: "hildegard.org",
-                company: {
-                  name: "Romaguera-Crona",
-                  catchPhrase: "Multi-layered client-server neural-net",
-                  bs: "harness real-time e-markets",
-                },
-              },
-              {
-                name: "Ervin Howell",
-                username: "Antonette",
-                email: "Shanna@melissa.tv",
-                address: {
-                  street: "Victor Plains",
-                  suite: "Suite 879",
-                  city: "Wisokyburgh",
-                  zipcode: "90566-7771",
-                  geo: {
-                    lat: "-43.9509",
-                    lng: "-34.4618",
-                  },
-                },
-                phone: "010-692-6593 x09125",
-                website: "anastasia.net",
-                company: {
-                  name: "Deckow-Crist",
-                  catchPhrase: "Proactive didactic contingency",
-                  bs: "synergize scalable supply-chains",
-                },
-              },
-              {
-                name: "Clementine Bauch",
-                username: "Samantha",
-                email: "Nathan@yesenia.net",
-                address: {
-                  street: "Douglas Extension",
-                  suite: "Suite 847",
-                  city: "McKenziehaven",
-                  zipcode: "59590-4157",
-                  geo: {
-                    lat: "-68.6102",
-                    lng: "-47.0653",
-                  },
-                },
-                phone: "1-463-123-4447",
-                website: "ramiro.info",
-                company: {
-                  name: "Romaguera-Jacobson",
-                  catchPhrase: "Face to face bifurcated interface",
-                  bs: "e-enable strategic applications",
-                },
-              },
-              {
-                name: "Patricia Lebsack",
-                username: "Karianne",
-                email: "Julianne.OConner@kory.org",
-                address: {
-                  street: "Hoeger Mall",
-                  suite: "Apt. 692",
-                  city: "South Elvis",
-                  zipcode: "53919-4257",
-                  geo: {
-                    lat: "29.4572",
-                    lng: "-164.2990",
-                  },
-                },
-                phone: "493-170-9623 x156",
-                website: "kale.biz",
-                company: {
-                  name: "Robel-Corkery",
-                  catchPhrase: "Multi-tiered zero tolerance productivity",
-                  bs: "transition cutting-edge web services",
-                },
-              },
-              {
-                name: "Chelsey Dietrich",
-                username: "Kamren",
-                email: "Lucio_Hettinger@annie.ca",
-                address: {
-                  street: "Skiles Walks",
-                  suite: "Suite 351",
-                  city: "Roscoeview",
-                  zipcode: "33263",
-                  geo: {
-                    lat: "-31.8129",
-                    lng: "62.5342",
-                  },
-                },
-                phone: "(254)954-1289",
-                website: "demarco.info",
-                company: {
-                  name: "Keebler LLC",
-                  catchPhrase: "User-centric fault-tolerant solution",
-                  bs: "revolutionize end-to-end systems",
-                },
-              },
-              
-            ]
-        }
-    }
-    
-    render() {
-        const name= this.props.name;
-        console.log("name render", name)
-        const card= this.state.cards.filter((item)=>item.name === "Chelsey Dietrich")
-        console.log("filter card", card)
-        return (
-            <div className="cardpage" >
-              <div className="input"> <Link to="/homepage">
-              <Button
-                type="primary"
-                htmlType="submit"
-                style={{borderRadius:"18px"}}
-                // className="title"
-              >
-                <ArrowLeftOutlined/>
-              </Button>
-              </Link></div>
-                {card.map((item,index)=>(
-                  
-                    <div key={index}>
-                      <div className="title"><Avatar
+  constructor(props) {
+    super(props)
+      this.state = {
+        images:[dp1,dp2,dp3],
+        index:0,
+        card:[],   
+        contentStyle : {
+          // height: '160px',
+          color: '#fff',
+          lineHeight: '160px',
+          textAlign: 'flex-end',
+          // background: '#364d79',
+        },
+          // name: 0,
+          // cards: [],
+      }
+  }
+  // getParam(param){
+  //   return new URLSearchParams(window.location.search).get(param);
+  // }
+  // getValue=(value)=>{
+  //   console.log("id got",this.state.index)
+  //   this.setState({
+  //     index:value,
+  //     // card: this.props.cards[value-1].name
+  //   })
+  //   // console.log('values given', value),
+  //   console.log("id got",this.state.index)
+  // }
+  async componentDidMount(){
+    var url=new URL(window.location);
+    console.log("url", url.pathname)
+    const path=url.pathname;
+    const length= path.length-1;
+    const id=path[length];
+    // console.log("path", id);
+    this.props.named(id-1);
+    console.log('name state',id)
+  }
+  setIndex=(value)=>{
+    this.setState({
+      index:value,
+    })
+    console.log("set index", this.state.index)
+  }
+  resetIndex=(value)=>{
+    this.setState({
+      index:'',
+    })
+    console.log("reset index", this.state.index, value)
+  }
+  render() {
+    let opac =0;
+
+    const name= this.props.name.data;
+    console.log("name is ", name);
+    // console.log("name render", name)
+    const card= this.props.cards[name];
+    console.log("filter card", card.name)
+    return (
+      <div className="cardpage" >
+        <div className="input">
+          <Link to="/homepage">
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{borderRadius:"18px"}}
+              // className="title"
+            >
+              <ArrowLeftOutlined/>
+            </Button>
+          </Link>
+        </div>
+           <div >
+            <div className="title">
+              <Popover content={card.name}  trigger="hover">
+                <Avatar
                   style={{
                     color: '#f56a00',
                     backgroundColor: '#fde3cf',
                   }}
                 >
-                  {item.name[0]}
-                </Avatar><h2>{item.name}</h2></div>
-                  
-          <div className='carousal'>
-            <Carousel dotPosition={'left'} >
-          <div >
-            <h3>
-              <img src={dp1} />
-            </h3>
-          </div>
-          <div>
-          <h3 style={this.state.contentStyle}>
-              <img src={dp2} />
-            </h3>
-          </div>
-          {/* <div>
-          <h3>
-              <img src={dp3} />
-            </h3>
-          </div> */}
-          {/* <div>
-          <h3 style={this.state.contentStyle}>
-              <img src={dp2} />
-            </h3>
-          </div> */}
-        </Carousel></div>
-  <Descriptions title={`${item.name}'s Info`}>
-  <Descriptions.Item label="Name">{item.name}</Descriptions.Item>
-  <Descriptions.Item label="UserName">{item.username}</Descriptions.Item>
-    <Descriptions.Item label="Telephone">{item.phone}</Descriptions.Item>
-    <Descriptions.Item label="Email">{item.email}</Descriptions.Item>
-    <Descriptions.Item label="Company">{item.company.name}</Descriptions.Item>
-    <Descriptions.Item label="Address">{item.address.street},{item.address.suite},{item.address.city},</Descriptions.Item>
-    <Descriptions.Item label="zip code">
-    {item.address.zipcode}
-    </Descriptions.Item>
-  </Descriptions>
-  </div>
-                ))}
+                  {card.name[0]}
+                </Avatar>
+              </Popover>
+              <h2>
+                {card.name}
+              </h2>
             </div>
-        )
-    }
+            <div className='carousal'>
+              <div className='photos'>
+                {card.images.map((item,index)=>
+                  (
+                    <div key={index} className='leftphoto'><Popover title={`image${index+1}`} trigger="hover">
+                      <h2  onClick={()=>this.setIndex(index)}>
+                        <img src={item}/>
+                      </h2>
+                    </Popover></div>
+                  ))
+                }
+              </div>
+              {this.state.index !== '' ?
+                <div className="photo" onClick={()=>this.resetIndex()}>
+                  <Popover title="image1" trigger="hover">
+                    <h2 >
+                      <img src={card.images[this.state.index]}/>
+                    </h2>
+                  </Popover>
+                </div>
+                :
+                <div className='photo'>
+                  <Carousel autoplay dotPosition={'left'} >
+                    {card.images.map((item,index)=>(
+                      <div  key={index} >
+                        <h2 style={this.state.contentStyle} >
+                          <img src={item} />
+                        </h2>
+                      </div>
+                    ))}
+                  </Carousel>
+                </div>
+              }
+            </div>
+            <Descriptions title={`${card.name}'s Info`}>
+              <Descriptions.Item label="Name">
+                {card.name}
+              </Descriptions.Item>
+              <Descriptions.Item label="UserName">
+                {card.username}
+              </Descriptions.Item>
+              <Descriptions.Item label="Telephone">
+                {card.phone}
+              </Descriptions.Item>
+              <Descriptions.Item label="Email">
+                {card.email}
+              </Descriptions.Item>
+              <Descriptions.Item label="Company">
+                {card.company.name}
+              </Descriptions.Item>
+              <Descriptions.Item label="Address">
+                {card.address.street}, {card.address.suite}, {card.address.city},
+              </Descriptions.Item>
+              <Descriptions.Item label="zip code">
+                {card.address.zipcode}
+              </Descriptions.Item>
+            </Descriptions>
+          </div> 
+          
+
+         
+          
+          <div>
+            <Homepage/>
+          </div>
+      </div>
+    )
+  }  
 }
 const mapStateToProps = (state) => {
     const name = state.data;
-    const cards= state.cardetails;
+    const cards= state.cards.cardetails;
 
-    console.log("index recieved", name);
+    console.log("red cards recieved",cards);
   
     return {
       name,
-      cards,
+      cards,  
     };
   };
   
-//   const mapDispatchToProps = (dispatch) => {
-//     return {
-//       carded: (payload) => dispatch(carded(payload)),
-//       named: (payload) => dispatch(named(payload)),
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      carded: (payload) => dispatch(carded(payload)),
+      named: (payload) => dispatch(named(payload)),
   
-//     };
-//   };
-  export default connect(mapStateToProps, null)(Card);
+    };
+  };
+  export default connect(mapStateToProps,mapDispatchToProps)(Card);
   
 
  

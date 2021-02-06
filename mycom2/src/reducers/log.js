@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-    data:''
+    data:0
 }
 
 const dataReducer = (state=INITIAL_STATE, action) =>{

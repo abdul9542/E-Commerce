@@ -20,7 +20,7 @@ render(){
         <Switch>
         <Route path='/' exact component={Login}/>
         <Route path='/homepage' exact component={Homepage}/>
-        <Route path='/homepage/:cardNo' exact component={Card}/>
+        <Route path='/homepage/id=:No' exact component={Card}/>
 
 
         </Switch>
