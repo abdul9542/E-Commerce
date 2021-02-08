@@ -95,7 +95,7 @@ class Homepage extends Component {
                   style={{ width: 250 }}
                   cover={<img alt="example" src={item.images[0]} />}
                 >
-                  <Meta title={item.name} description="www.instagram.com" />
+                  <Meta title={item.name}  />
                 </Card>
               </Col>
             </Link>

@@ -5,6 +5,8 @@ import actualReducer from './reducers/actualReducer';
 import givenReducer from './reducers/givenReducer';
 import loggedReducer from './reducers/log';
 import cardReducer from './reducers/cardreducer';
+// import cartReducer from './reducers/cart';
+
 import dataReducer from './reducers/log';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -19,6 +21,7 @@ const rootReducer= combineReducers({
   logged:loggedReducer,
   cards:cardReducer,
   data:dataReducer,
+  // cart:cartReducer,
 })
 
 ReactDOM.render(

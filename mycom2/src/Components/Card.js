@@ -5,10 +5,10 @@ import { useHistory,Link } from "react-router-dom";
 
 // import { Form, Input, Button, Checkbox } from "antd";
 import { Popover, Button } from 'antd';
-import { carded, named } from "../actions";
+import { carded, named,   selectCard } from "../actions";
 
 import { Layout, Menu, Breadcrumb } from "antd";
-import {ArrowLeftOutlined} from '@ant-design/icons';
+import {ArrowLeftOutlined, DownloadOutlined, ShoppingCartOutlined, VerticalRightOutlined  } from '@ant-design/icons';
 import '../App.css';
 import dp1 from '../dp1.jpg';
 import dp2 from '../dp2.jpg';
@@ -18,6 +18,7 @@ import { Carousel, Radio } from 'antd';
 
 import { Descriptions } from 'antd';
 import Homepage from './Homepage';
+import { getRenderPropValue } from 'antd/lib/_util/getRenderPropValue';
 
 const { Header, Content, Footer } = Layout;
 
@@ -26,9 +27,10 @@ export class Card extends Component {
   constructor(props) {
     super(props)
       this.state = {
+        size: 'large',
         images:[dp1,dp2,dp3],
         index:0,
-        card:[],   
+        value:'',   
         contentStyle : {
           // height: '160px',
           color: '#fff',
@@ -40,18 +42,15 @@ export class Card extends Component {
           // cards: [],
       }
   }
-  // getParam(param){
-  //   return new URLSearchParams(window.location.search).get(param);
-  // }
-  // getValue=(value)=>{
-  //   console.log("id got",this.state.index)
-  //   this.setState({
-  //     index:value,
-  //     // card: this.props.cards[value-1].name
-  //   })
-  //   // console.log('values given', value),
-  //   console.log("id got",this.state.index)
-  // }
+  getValue=(value)=>{
+    console.log("id got",value)
+    this.setState({
+      value:value,
+      // card: this.props.cards[value-1].name
+    })
+    // console.log('values given', value),
+    console.log("id got",this.state.value)
+  }
   async componentDidMount(){
     var url=new URL(window.location);
     console.log("url", url.pathname)
@@ -61,7 +60,8 @@ export class Card extends Component {
     // const length= path.length-1;
     // console.log("path", id);
     this.props.named(value-1);
-    console.log('id fetched',value)
+    this.getValue(value-1);
+    console.log('id fetched',this.state.value)
   }
   setIndex=(value)=>{
     this.setState({
@@ -75,55 +75,55 @@ export class Card extends Component {
     })
     console.log("reset index", this.state.index, value)
   }
-  // myloop=()=>{
-  //   let j="";
-  //   const text=window.location.pathname;
-  //   var value = (text.split('='))[1];
-  //   value = decodeURIComponent(value);
+  // myloop=(value)=>{
+  //   const cart= this.props.cart;
+  //   let i;
+  //   for( i=0; i<cart.length; i++){
+  //     console.log("for working")
+  //     // if(i === value){
+  //     //   count+=1;
+  //     //   console.log("value already in the cart", value)
+  //     // }
+  //   }
     
   //   // for(var i=14; i<= text.length; i++){
   //   //   j+= text[i-1]
   //   // }
   //   console.log("id is", value)
   // }
+  
+  select=(value)=>{
+    this.props.selectCard(value);
+
+  }
   render() {
     // text='',
-    // this.myloop();
-
-    const name= this.props.name.data;
-    console.log("name is ", name);
+    
+   
+    const id= this.props.name.data;
+    console.log("name is ",id);
+    // this.myloop(id);
     // console.log("name render", name)
-    const card= this.props.cards[name];
+    const card= this.props.cards[id];
     console.log("filter card", card.name)
     return (
       <div className="cardpage" >
-        <div className="input">
-          <Link to="/homepage">
-            <Button
-              type="primary"
-              htmlType="submit"
-              style={{borderRadius:"18px"}}
-              // className="title"
-            >
-              <ArrowLeftOutlined/>
-            </Button>
-          </Link>
-        </div>
+       
         <div >
-          <div className="title">
-            <Popover content={card.name}  trigger="hover">
-              <Avatar
-                style={{
-                  color: '#f56a00',
-                  backgroundColor: '#fde3cf',
-                }}
-              >
-                {card.name[0]}
-              </Avatar>
-            </Popover>
+          
+          <div className='top'>  
+          <div  className="title">   
+          <div className="input">
+            <Link to="/homepage">
+              <ArrowLeftOutlined/>
+            </Link>
+        </div>        
             <h2>
               {card.name}
-            </h2>
+            </h2></div>
+            <div className='cartlist'>
+              <Link to='/cart/'>
+              <h3 className='icon'><ShoppingCartOutlined/></h3></Link></div>
           </div>
           <div className='carousal'>
             <div className='photos'>
@@ -160,6 +160,16 @@ export class Card extends Component {
                 </Carousel>
               </div>
             }
+            <div id="buttonblog">
+              <div id='buttons'>
+                <Button   shape="round" icon={<ShoppingCartOutlined/>} onClick={()=> this.select(id)}  size={this.state.size}>
+                  Add To Cart
+                </Button>
+                <Button  shape="round"  size={this.state.size}>
+                  Buy Now
+                </Button>
+              </div>
+            </div>
           </div>
           <Descriptions title={`${card.name}'s Info`}>
             <Descriptions.Item label="Name">
@@ -199,22 +209,21 @@ export class Card extends Component {
             </Descriptions.Item>
           </Descriptions>
         </div>
-        <div>
-          <Homepage/>
-        </div>
       </div>
     )
   }  
 }
 const mapStateToProps = (state) => {
     const name = state.data;
+    // const cart = state.cart;
     const cards= state.cards.cardetails;
 
-    console.log("red cards recieved",cards);
+    // console.log("cart recieved",cart);
   
     return {
       name,
-      cards,  
+      cards,
+      // cart,  
     };
   };
   
@@ -222,6 +231,7 @@ const mapStateToProps = (state) => {
     return {
       carded: (payload) => dispatch(carded(payload)),
       named: (payload) => dispatch(named(payload)),
+      selectCard:(payload) => dispatch( selectCard(payload)),
   
     };
   };

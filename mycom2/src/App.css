@@ -20,13 +20,37 @@
 }
 .ant-input-affix-wrapper{
   display: flex;
-  border: 1px solid ;
+  /* border: 1px solid ; */
   border-radius: 25px !important;
 }
 h3 {
   height: 160px;
   color: rgb(255, 255, 255);
   line-height: 160px;
+}
+.price p{
+  display: flex;
+  justify-content: flex-end;
+}
+.top{
+  display: flex;
+  flex: 2;
+  height: 59px;
+}
+.cartlist{
+  display: flex;
+  flex:1;
+  /* border: 1px solid;  */
+  justify-content: flex-end;
+}
+.icon{
+  width: 18%;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  /* color:red; */
+  align-items: center;
+  /* border: 1px solid pink; */
 }
 .slick-track{
   display: flex;
@@ -50,7 +74,7 @@ h3 {
 } */
 .anticon {
   display: flex;
-  font-size: 16px;
+  font-size: 31px;
   color: blueviolet;
   margin-bottom: 1%;
 }
@@ -78,6 +102,7 @@ justify-content: center;
 }
 .title{
   display: flex;
+  flex:1;
   padding-top: 9px;
   padding-left: 12px;
 }
@@ -88,6 +113,8 @@ justify-content: center;
 }
 .input{
   display:flex;
+  align-items: center;
+  margin-right: 1%;
 }
 .photos{
   /* display: flex; */
@@ -97,28 +124,89 @@ justify-content: center;
 .leftphoto{
   display: flex;
   justify-content: center;
+  /* border: 1px solid; */
+
 }
 .leftphoto p{
   display: flex;
   height: 73px;
   justify-content: center;
   cursor: pointer;
+  /* border: 1px solid; */
 }
-.leftphoto h2:hover{
-  box-shadow: 20px, 20px 4px red;
+h1,h2,h3,h4,h5{
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
+
 .photos p:hover{
   opacity: 0.5;
-  box-shadow: 20px 20px 4px red; 
 }
 .photo{
+  /* border: 1px solid; */
   display: flex;
 }
-.photo h2{
+.photo h2 {
   display: flex;
   width: 233px;
   height: 233px;
   background:transparent;
+}
+.photo div {
+  /* display: flex; */
+  width: 233px;
+  height: 233px;
+  background:transparent;
+}
+#buttons{
+  /* width: 100%; */
+  align-items: center;
+  /* border:1px solid; */
+  height: 67%;
+  /* width: 21%; */
+  border-radius: 14%;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+}
+#buttons:hover{
+  /* border:1px solid red; */
+  background-color: lightcyan;
+
+}
+#buttonblog{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.ant-descriptions-view{
+  width:100%;
+  overflow: hidden;
+  padding-left: 1%;
+}
+.ant-btn-round.ant-btn-lg{
+  color: white  ;
+  background-color: darkblue;
+}
+.ant-btn-round.ant-btn-lg:hover{
+ color: black;
+}
+.ant-layout-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: transparent !important;
+}
+.finalcard{
+  display: flex;
+  margin-top: 1%;
+  /* border: 1px solid; */
+}
+.dp{
+  display: flex;
+  height: 192px;
+  background: aliceblue !important;
 }
 .App-logo {
   height: 40vmin;

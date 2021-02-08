@@ -24,3 +24,15 @@ export const carded = (payload) =>{
         payload
     }
 }
+export const getCart = (payload) =>{
+    return{
+        type:'ADD_CART',
+        payload
+    }
+}
+export const selectCard = (payload) =>{
+    return{
+        type:'SELECT_CARD',
+        payload
+    }
+}

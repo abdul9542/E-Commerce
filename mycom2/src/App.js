@@ -8,6 +8,7 @@ import Login from './Components/Login';
 import Card  from './Components/Card';
 import React,{ Component } from 'react';
 import Sample  from './Components/Sample';
+import checkout from './Components/checkout';
 
 class App extends Component {
 render(){
@@ -21,6 +22,8 @@ render(){
         <Route path='/' exact component={Login}/>
         <Route path='/homepage' exact component={Homepage}/>
         <Route path='/homepage/:No' exact component={Card}/>
+        <Route path='/cart/' exact component={checkout}/>
+
 
 
         </Switch>
