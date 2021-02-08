@@ -98,14 +98,18 @@ justify-content: center;
   display: flex;
   justify-content: center;
 }
-.leftphoto h2{
+.leftphoto p{
   display: flex;
   height: 73px;
   justify-content: center;
   cursor: pointer;
 }
-.photos h2:hover{
+.leftphoto h2:hover{
+  box-shadow: 20px, 20px 4px red;
+}
+.photos p:hover{
   opacity: 0.5;
+  box-shadow: 20px 20px 4px red; 
 }
 .photo{
   display: flex;

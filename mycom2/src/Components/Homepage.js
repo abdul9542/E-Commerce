@@ -84,7 +84,7 @@ class Homepage extends Component {
         <Row  className="row">
           {redcards.map((item, index) =>
           (
-            <Link to={`/homepage/id=${index+1}`}>
+            <Link to={`/homepage/${index+1}`}>
               <Col
                 className="item"
                 key={index}

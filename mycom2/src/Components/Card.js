@@ -56,11 +56,12 @@ export class Card extends Component {
     var url=new URL(window.location);
     console.log("url", url.pathname)
     const path=url.pathname;
-    const length= path.length-1;
-    const id=path[length];
+    var value = (path.split('/'))[2];
+    // value = decodeURIComponent(value);
+    // const length= path.length-1;
     // console.log("path", id);
-    this.props.named(id-1);
-    console.log('name state',id)
+    this.props.named(value-1);
+    console.log('id fetched',value)
   }
   setIndex=(value)=>{
     this.setState({
@@ -74,8 +75,20 @@ export class Card extends Component {
     })
     console.log("reset index", this.state.index, value)
   }
+  // myloop=()=>{
+  //   let j="";
+  //   const text=window.location.pathname;
+  //   var value = (text.split('='))[1];
+  //   value = decodeURIComponent(value);
+    
+  //   // for(var i=14; i<= text.length; i++){
+  //   //   j+= text[i-1]
+  //   // }
+  //   console.log("id is", value)
+  // }
   render() {
-    let opac =0;
+    // text='',
+    // this.myloop();
 
     const name= this.props.name.data;
     console.log("name is ", name);
@@ -96,87 +109,99 @@ export class Card extends Component {
             </Button>
           </Link>
         </div>
-           <div >
-            <div className="title">
-              <Popover content={card.name}  trigger="hover">
-                <Avatar
-                  style={{
-                    color: '#f56a00',
-                    backgroundColor: '#fde3cf',
-                  }}
-                >
-                  {card.name[0]}
-                </Avatar>
-              </Popover>
-              <h2>
-                {card.name}
-              </h2>
-            </div>
-            <div className='carousal'>
-              <div className='photos'>
-                {card.images.map((item,index)=>
-                  (
-                    <div key={index} className='leftphoto'><Popover title={`image${index+1}`} trigger="hover">
-                      <h2  onClick={()=>this.setIndex(index)}>
+        <div >
+          <div className="title">
+            <Popover content={card.name}  trigger="hover">
+              <Avatar
+                style={{
+                  color: '#f56a00',
+                  backgroundColor: '#fde3cf',
+                }}
+              >
+                {card.name[0]}
+              </Avatar>
+            </Popover>
+            <h2>
+              {card.name}
+            </h2>
+          </div>
+          <div className='carousal'>
+            <div className='photos'>
+              {card.images.map((item,index)=>
+                (
+                  <div key={index} className='leftphoto'>
+                    <Popover title={`image${index+1}`} trigger="hover">
+                      <p  onClick={()=>this.setIndex(index)}>
                         <img src={item}/>
-                      </h2>
-                    </Popover></div>
-                  ))
-                }
-              </div>
-              {this.state.index !== '' ?
-                <div className="photo" onClick={()=>this.resetIndex()}>
-                  <Popover title="image1" trigger="hover">
-                    <h2 >
-                      <img src={card.images[this.state.index]}/>
-                    </h2>
-                  </Popover>
-                </div>
-                :
-                <div className='photo'>
-                  <Carousel autoplay dotPosition={'left'} >
-                    {card.images.map((item,index)=>(
-                      <div  key={index} >
-                        <h2 style={this.state.contentStyle} >
-                          <img src={item} />
-                        </h2>
-                      </div>
-                    ))}
-                  </Carousel>
-                </div>
+                      </p>
+                    </Popover>
+                  </div>
+                ))
               }
             </div>
-            <Descriptions title={`${card.name}'s Info`}>
-              <Descriptions.Item label="Name">
-                {card.name}
-              </Descriptions.Item>
-              <Descriptions.Item label="UserName">
-                {card.username}
-              </Descriptions.Item>
-              <Descriptions.Item label="Telephone">
-                {card.phone}
-              </Descriptions.Item>
-              <Descriptions.Item label="Email">
-                {card.email}
-              </Descriptions.Item>
-              <Descriptions.Item label="Company">
-                {card.company.name}
-              </Descriptions.Item>
-              <Descriptions.Item label="Address">
-                {card.address.street}, {card.address.suite}, {card.address.city},
-              </Descriptions.Item>
-              <Descriptions.Item label="zip code">
-                {card.address.zipcode}
-              </Descriptions.Item>
-            </Descriptions>
-          </div> 
-          
-
-         
-          
-          <div>
-            <Homepage/>
+            {this.state.index !== '' ?
+              <div className="photo" onClick={()=>this.resetIndex()}>
+                <Popover title="image1" trigger="hover">
+                  <h2 >
+                    <img src={card.images[this.state.index]}/>
+                  </h2>
+                </Popover>
+              </div>
+              :
+              <div className='photo'>
+                <Carousel autoplay dotPosition={'left'} >
+                  {card.images.map((item,index)=>(
+                    <div  key={index} >
+                      <h2 style={this.state.contentStyle} >
+                        <img src={item} />
+                      </h2>
+                    </div>
+                  ))}
+                </Carousel>
+              </div>
+            }
           </div>
+          <Descriptions title={`${card.name}'s Info`}>
+            <Descriptions.Item label="Name">
+              <h4>
+                {card.name}
+              </h4>
+            </Descriptions.Item>
+            <Descriptions.Item label="UserName">
+              <h4>
+                {card.username}
+              </h4>
+            </Descriptions.Item>
+            <Descriptions.Item label="Telephone">
+              <h4>
+                {card.phone}
+              </h4>
+            </Descriptions.Item>
+            <Descriptions.Item label="Email">
+              <h4>
+                {card.email}
+              </h4>
+            </Descriptions.Item>
+            <Descriptions.Item label="Company">
+              <h4>
+                {card.company.name}
+              </h4>
+            </Descriptions.Item>
+            <Descriptions.Item label="Address">
+              <h4>
+                {card.address.street}, {card.address.suite}, {card.address.city},
+              </h4>
+            </Descriptions.Item>
+            <Descriptions.Item label="zip code">
+              <h4>
+                {card.address.zipcode}
+              </h4>
+            </Descriptions.Item>
+          </Descriptions>
+        </div>
+        <div>
+          <Homepage/>
+        </div>
       </div>
     )
   }  
