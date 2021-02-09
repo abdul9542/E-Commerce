@@ -61,12 +61,13 @@ class LoginUI extends Component {
           onFinish={this.onFinish}
         >
           <Form.Item
-          className="input"
+           
+            className="input "
             name="username"
             rules={[
               {
                 required: true,
-                message: "Please input your Username!",
+                message: "Please input your Username!"
               },
             ]}
           >

@@ -9,7 +9,7 @@ import { carded, named,   selectCard } from "../actions";
 
 import { Layout, Menu, Breadcrumb } from "antd";
 import {ArrowLeftOutlined, DownloadOutlined, ShoppingCartOutlined, VerticalRightOutlined  } from '@ant-design/icons';
-import '../App.css';
+// import '../App.css';
 import dp1 from '../dp1.jpg';
 import dp2 from '../dp2.jpg';
 import dp3 from '../dp3.jpg';
@@ -75,22 +75,7 @@ export class Card extends Component {
     })
     console.log("reset index", this.state.index, value)
   }
-  // myloop=(value)=>{
-  //   const cart= this.props.cart;
-  //   let i;
-  //   for( i=0; i<cart.length; i++){
-  //     console.log("for working")
-  //     // if(i === value){
-  //     //   count+=1;
-  //     //   console.log("value already in the cart", value)
-  //     // }
-  //   }
-    
-  //   // for(var i=14; i<= text.length; i++){
-  //   //   j+= text[i-1]
-  //   // }
-  //   console.log("id is", value)
-  // }
+  
   
   select=(value)=>{
     this.props.selectCard(value);

@@ -18,7 +18,7 @@ const INITIAL_STATE = {
             lng: "81.1496",
           },
         },
-        price:229,selected:false,phone: "1-770-736-8031 x56442",
+        price:"229",selected:false,phone: "1-770-736-8031 x56442",
         website: "hildegard.org",
         company: {
           name: "Romaguera-Crona",
@@ -40,7 +40,7 @@ const INITIAL_STATE = {
             lng: "-34.4618",
           },
         },
-        price:229,selected:false,phone: "010-692-6593 x09125",
+        price:"229",selected:false,phone: "010-692-6593 x09125",
         website: "anastasia.net",
         company: {
           name: "Deckow-Crist",
@@ -62,7 +62,7 @@ const INITIAL_STATE = {
             lng: "-47.0653",
           },
         },
-        price:229,selected:false,phone: "1-463-123-4447",
+        price:"229",selected:false,phone: "1-463-123-4447",
         website: "ramiro.info",
         company: {
           name: "Romaguera-Jacobson",
@@ -84,7 +84,7 @@ const INITIAL_STATE = {
             lng: "-164.2990",
           },
         },
-        price:229,selected:false,phone: "493-170-9623 x156",
+        price:"229",selected:false,phone: "493-170-9623 x156",
         website: "kale.biz",
         company: {
           name: "Robel-Corkery",
@@ -106,7 +106,7 @@ const INITIAL_STATE = {
             lng: "62.5342",
           },
         },
-        price:229,selected:false,phone: "(254)954-1289",
+        price:"229",selected:false,phone: "(254)954-1289",
         website: "demarco.info",
         company: {
           name: "Keebler LLC",
@@ -128,7 +128,7 @@ const INITIAL_STATE = {
             lng: "81.1496",
           },
         },
-        price:229,selected:false,phone: "1-770-736-8031 x56442",
+        price:"229",selected:false,phone: "1-770-736-8031 x56442",
         website: "hildegard.org",
         company: {
           name: "Romaguera-Crona",
@@ -150,7 +150,7 @@ const INITIAL_STATE = {
             lng: "-34.4618",
           },
         },
-        price:229,selected:false,phone: "010-692-6593 x09125",
+        price:"229",selected:false,phone: "010-692-6593 x09125",
         website: "anastasia.net",
         company: {
           name: "Deckow-Crist",
@@ -172,7 +172,7 @@ const INITIAL_STATE = {
             lng: "-47.0653",
           },
         },
-        price:229,selected:false,phone: "1-463-123-4447",
+        price:"229",selected:false,phone: "1-463-123-4447",
         website: "ramiro.info",
         company: {
           name: "Romaguera-Jacobson",
@@ -194,7 +194,7 @@ const INITIAL_STATE = {
             lng: "-164.2990",
           },
         },
-        price:229,selected:false,phone: "493-170-9623 x156",
+        price:"229",selected:false,phone: "493-170-9623 x156",
         website: "kale.biz",
         company: {
           name: "Robel-Corkery",
@@ -217,7 +217,7 @@ const INITIAL_STATE = {
             lng: "-34.4618",
           },
         },
-        price:229,selected:false,phone: "010-692-6593 x09125",
+        price:"229",selected:false,phone: "010-692-6593 x09125",
         website: "anastasia.net",
         company: {
           name: "Deckow-Crist",
@@ -239,7 +239,7 @@ const INITIAL_STATE = {
             lng: "-47.0653",
           },
         },
-        price:229,selected:false,phone: "1-463-123-4447",
+        price:"229",selected:false,phone: "1-463-123-4447",
         website: "ramiro.info",
         company: {
           name: "Romaguera-Jacobson",
@@ -261,7 +261,7 @@ const INITIAL_STATE = {
             lng: "-164.2990",
           },
         },
-        price:229,selected:false,phone: "493-170-9623 x156",
+        price:"229",selected:false,phone: "493-170-9623 x156",
         website: "kale.biz",
         company: {
           name: "Robel-Corkery",
@@ -283,7 +283,7 @@ const INITIAL_STATE = {
             lng: "62.5342",
           },
         },
-        price:229,selected:false,phone: "(254)954-1289",
+        price:"229",selected:false,phone: "(254)954-1289",
         website: "demarco.info",
         company: {
           name: "Keebler LLC",
